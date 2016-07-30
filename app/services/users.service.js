@@ -1,7 +1,7 @@
 (function () {
 
   angular
-    .module('api.users', [])
+    .module('app')
     .factory('UsersFactory', UsersFactory)
 
     function UsersFactory() {

@@ -1,22 +1,22 @@
-<form name="profile" onsubmit="form.validate()">
+<form name="profileForm" onsubmit="form.validate()">
   <div class="form-group">
     <label for="email" class="label-control">Email</label>
-    <input id="email" name="email" type="text" class="form-control" ng-model="form.email">
+    <input id="email" name="email" type="email" class="form-control" ng-model="profile.email">
   </div>
 
   <div class="form-group">
     <label for="username" class="label-control">Username</label>
-    <input id="username" name="username" type="text" class="form-control" ng-model="form.username">
+    <input id="username" name="username" type="text" class="form-control" ng-model="profile.username">
   </div>
 
   <div class="form-group">
     <label for="password" class="label-control">Password</label>
-    <input id="password" name="password" type="text" class="form-control" ng-model="form.password">
+    <input id="password" name="password" type="password" class="form-control" ng-model="profile.password">
   </div>
 
   <div class="form-group">
-    <label for="email" class="label-control">Confirm Password</label>
-    <input id="email" name="email" type="text" class="form-control" ng-model="form.password-confirm">
+    <label for="password-confirm" class="label-control">Confirm Password</label>
+    <input id="password-confirm" name="password-confirm" type="password" class="form-control" ng-model="profile.passwordConfirm">
   </div>
 
   <input type="text" class="btn btn-primary pull-right" value="Submit">

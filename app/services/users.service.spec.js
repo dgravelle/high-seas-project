@@ -6,7 +6,7 @@ describe('Users Factory', () => {
     { id: 3, username: 'cate', email: 'cate@test.com', password: 'password' }
   ];
 
-  beforeEach(angular.mock.module('api.users'));
+  beforeEach(angular.mock.module('app'));
 
   beforeEach(inject((_UsersFactory_) => {
     UsersFactory = _UsersFactory_;
