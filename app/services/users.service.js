@@ -15,9 +15,20 @@
 
       Users.getUser = (userId) => {
         // api call would normally go here
-        console.log('get user');
         return userList.find((user) => {
           return user.id === userId;
+        });
+      }
+
+      Users.getUserByEmail = (email) => {
+        return userList.find((user) => {
+          return user.email === email;
+        });
+      }
+
+      Users.getUserByUsername = (username) => {
+        return userList.find((user) => {
+          return user.username === username;
         });
       }
 

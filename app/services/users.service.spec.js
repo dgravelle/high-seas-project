@@ -21,4 +21,25 @@ describe('Users Factory', () => {
       expect(UsersFactory.getUser(1)).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' })
     });
   });
+
+  describe('.getUserByEmail()', () => {
+    it('should return users credential when provided an existing email', () => {
+      expect(UsersFactory.getUserByEmail('abby@test.com')).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' });
+    });
+
+    it('should return undefined when provided email does not exist', () => {
+      expect(UsersFactory.getUserByEmail('hello@world.com')).toEqual(undefined);
+    });
+  });
+
+  describe('.getUserByUsername()', () => {
+    it('should return users credential when provided an existing username', () => {
+      expect(UsersFactory.getUserByUsername('abby')).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' });
+    });
+
+    it('should return undefined when provided username does not exist', () => {
+      expect(UsersFactory.getUserByUsername('abc')).toEqual(undefined);
+    });
+  });
+
 });
