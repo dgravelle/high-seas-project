@@ -15,4 +15,10 @@ describe('Users Factory', () => {
   it('should be defined', () => {
     expect(UsersFactory).toBeDefined();
   });
+
+  describe('.getUser()', () => {
+    it('should return users credential for provided user Id', () => {
+      expect(UsersFactory.getUser(1)).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' })
+    });
+  });
 });
