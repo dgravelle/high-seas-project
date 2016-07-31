@@ -32,6 +32,12 @@ describe('Users Factory', () => {
     });
   });
 
+  describe('.updateEmail()', () => {
+    it('should update a provided users email address and return their credentials', () => {
+      expect(UsersFactory.updateEmail(0, 'new@email.com')).toEqual({ id: 1, username: 'abby', email: 'new@email.com', password: 'password' });
+    });
+  });
+
   describe('.getUserByUsername()', () => {
     it('should return users credential when provided an existing username', () => {
       expect(UsersFactory.getUserByUsername('abby')).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' });

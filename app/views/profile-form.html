@@ -1,23 +1,50 @@
-<form name="profileForm" onsubmit="form.validate()">
-  <div class="form-group">
-    <label for="email" class="label-control">Email</label>
-    <input id="email" name="email" type="email" class="form-control" ng-model="profile.email">
+<div class="alert alert-success text-center" ng-show="successMsg">
+  {{ successMsg }}
+</div>
+
+<form class="well" name="profileForm" ng-submit="validate(profileForm.$valid, profile)">
+  <div class="form-group" ng-class="{ 'has-error': profileForm.email.$invalid || emailTaken }">
+    <label for="email" class="control-label">Email</label>
+    <input id="email"
+      name="email"
+      type="email"
+      class="form-control"
+      ng-model="profile.email"
+      ng-pattern="/^.+@.+\..+$/"
+      required
+      >
+      <div ng-show="emailTaken">
+        <span class="help-block">{{ emailTaken }}</span>
+      </div>
+      <div ng-messages="profileForm.email.$error">
+        <span class="help-block" ng-message="required">Please provide a valid email address</span>
+        <span class="help-block" ng-message="pattern">Please provide a valid email address</span>
+      </div>
   </div>
 
+
   <div class="form-group">
-    <label for="username" class="label-control">Username</label>
+    <label for="username" class="control-label">Username</label>
     <input id="username" name="username" type="text" class="form-control" ng-model="profile.username">
+    <div ng-messages="profileForm.username.$error">
+      <span class="help-block" ng-message="required">Please provide a valid email address</span>
+      <span class="help-block" ng-message="pattern">Please provide a valid email address</span>
+    </div>
   </div>
 
+
   <div class="form-group">
-    <label for="password" class="label-control">Password</label>
+    <label for="password" class="control-label">Password</label>
     <input id="password" name="password" type="password" class="form-control" ng-model="profile.password">
   </div>
 
   <div class="form-group">
-    <label for="password-confirm" class="label-control">Confirm Password</label>
+    <label for="password-confirm" class="control-label">Confirm Password</label>
     <input id="password-confirm" name="password-confirm" type="password" class="form-control" ng-model="profile.passwordConfirm">
   </div>
-
-  <input type="text" class="btn btn-primary pull-right" value="Submit">
+  <button class="btn btn-default" ng-click="resetProfile()">Cancel</button>
+  <input type="submit" class="btn btn-primary pull-right" value="Submit" ng-disabled="profileForm.$invalid">
 </form>
+
+<button ng-click="makeError()">error me</button>
+{{ emailTaken }}

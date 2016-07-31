@@ -2,7 +2,8 @@
 
   angular
     .module('app', [
-      'ngRoute'
+      'ngRoute',
+      'ngMessages'
     ])
     .config(($routeProvider) => {
       $routeProvider

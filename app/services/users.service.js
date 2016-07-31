@@ -26,6 +26,11 @@
         });
       }
 
+      Users.updateEmail = (userId, newEmail) => {
+        userList[userId].email = newEmail;
+        return userList[userId];
+      }
+
       Users.getUserByUsername = (username) => {
         return userList.find((user) => {
           return user.username === username;

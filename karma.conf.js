@@ -18,9 +18,13 @@ module.exports = function(config) {
       './node_modules/angular/angular.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './node_modules/angular-route/angular-route.js',
+      './node_modules/angular-messages/angular-messages.js',
       './app/app.js',
       './app/services/users.service.js',
-      './app/services/users.service.spec.js'
+      './app/services/users.service.spec.js',
+      './app/controllers/profile.controller.js',
+      './app/controllers/profile.controller.spec.js'
+
     ],
 
 
