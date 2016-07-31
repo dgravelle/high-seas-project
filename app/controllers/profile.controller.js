@@ -7,7 +7,7 @@
     ProfileController.$inject = ['$scope', 'UsersFactory', 'user'];
 
     function ProfileController($scope, UsersFactory, user) {
-      var profileStore = user;
+      var profileStore = UsersFactory.getUser(1);
 
       $scope.successMsg;
       $scope.emailTaken;
