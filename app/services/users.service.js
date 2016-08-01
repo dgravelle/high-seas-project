@@ -4,7 +4,9 @@
     .module('app')
     .factory('UsersFactory', UsersFactory)
 
-    function UsersFactory() {
+    UsersFactory.$inject = ['$http']
+
+    function UsersFactory($http) {
       var Users = {};
 
       var userList = [
@@ -14,30 +16,28 @@
       ];
 
       Users.getUser = (userId) => {
-        // api call would normally go here
-        return userList.find((user) => {
-          return user.id === userId;
+        return $http.get('/api/users/' + userId).then(user => {
+          console.log('from factory', user.data);
+          return user.data;
         });
       }
 
       Users.getUserByEmail = (email) => {
-        return userList.find((user) => {
-          return user.email === email;
-        });
+        return $http.get('/api/users/email_exists?email=' + email).then(user => {
+          console.log(user);
+          return user.data
+        })
       }
 
       Users.updateEmail = (userId, newEmail) => {
-        var user = userList.find((user) => {
-          return user.id === userId;
+        return $http.put('/api/users/' + userId, { email: newEmail }).then(data => {
+          console.log(data);
+          return data;
         });
-
-        user.email = newEmail;
-
-        return user;
       }
 
       Users.getUserByUsername = (username) => {
-        return userList.find((user) => {
+        return userList.find(user => {
           return user.username === username;
         });
       }

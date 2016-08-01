@@ -2,9 +2,9 @@
   "name": "high-seas",
   "version": "1.0.0",
   "description": "Form validation exercise using Angular",
-  "main": "app/app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start"
   },
   "author": "DG",
   "license": "ISC",

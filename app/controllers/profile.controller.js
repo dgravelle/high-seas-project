@@ -7,7 +7,7 @@
     ProfileController.$inject = ['$scope', 'UsersFactory', 'user'];
 
     function ProfileController($scope, UsersFactory, user) {
-      var profileStore = UsersFactory.getUser(1);
+      var profileStore = user;
 
       $scope.successMsg;
       $scope.emailTaken;
@@ -32,19 +32,20 @@
         }
 
         if (form.email !== profileStore.email) {
-          if (!UsersFactory.getUserByEmail(form.email)) {
-            UsersFactory.updateEmail(user.id, form.email);
-            $scope.emailTaken = false;
-            return $scope.successMsg = `Success! Your email has been updated to ${user.email}`;
-          }
-          else {
-            return $scope.emailTaken = 'Sorry, this email is already in use'
-          }
+          UsersFactory.getUserByEmail(form.email).then(data => {
+            if (!data.data) {
+              UsersFactory.updateEmail(user.id, form.email).then(data => {
+                var user = data.data
+                $scope.emailTaken = false;
+                return $scope.successMsg = `Success! Your email has been updated to ${user.email}`;
+              });
+            }
+            else {
+              return $scope.emailTaken = 'Sorry, this email is already in use';
+            }
+          });
         }
       }
 
-
-
     }
-
-})()
+  })();

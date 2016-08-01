@@ -1,6 +1,8 @@
 describe('Users Factory', () => {
-  var UsersFactory;
-  var userList = [
+  var UsersFactory,
+      injector,
+      http,
+      userList = [
     { id: 1, username: 'abby', email: 'abby@test.com', password: 'password' },
     { id: 2, username: 'bill', email: 'bill@test.com', password: 'password' },
     { id: 3, username: 'cate', email: 'cate@test.com', password: 'password' }
@@ -8,8 +10,10 @@ describe('Users Factory', () => {
 
   beforeEach(angular.mock.module('app'));
 
-  beforeEach(inject((_UsersFactory_) => {
+  beforeEach(inject((_UsersFactory_, _$injector_) => {
     UsersFactory = _UsersFactory_;
+    injector = _$injector_;
+    http = injector.get('$httpBackend');
   }));
 
   it('should be defined', () => {
@@ -18,33 +22,50 @@ describe('Users Factory', () => {
 
   describe('.getUser()', () => {
     it('should return users credential for provided user Id', () => {
-      expect(UsersFactory.getUser(1)).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' })
+      var user;
+      UsersFactory.getUser(1).then((data) => {
+          user = data;
+          return user;
+      });
+
+      expect(user).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' });
+
     });
   });
 
   describe('.getUserByEmail()', () => {
     it('should return users credential when provided an existing email', () => {
-      expect(UsersFactory.getUserByEmail('abby@test.com')).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' });
+      var user = UsersFactory.getUserByEmail('abby@test.com');
+
+      expect(user).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' });
     });
 
     it('should return undefined when provided email does not exist', () => {
-      expect(UsersFactory.getUserByEmail('hello@world.com')).toEqual(undefined);
+      var user = UsersFactory.getUserByEmail('hello@world.com');
+
+      expect(user).toEqual(undefined);
     });
   });
 
   describe('.updateEmail()', () => {
     it('should update a provided users email address and return their credentials', () => {
-      expect(UsersFactory.updateEmail(1, 'new@email.com')).toEqual({ id: 1, username: 'abby', email: 'new@email.com', password: 'password' });
+      var user = UsersFactory.updateEmail(1, 'new@email.com');
+
+      expect(user).toEqual({ id: 1, username: 'abby', email: 'new@email.com', password: 'password' });
     });
   });
 
   describe('.getUserByUsername()', () => {
     it('should return users credential when provided an existing username', () => {
-      expect(UsersFactory.getUserByUsername('abby')).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' });
+      var user = UsersFactory.getUserByUsername('abby');
+
+      expect(user).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' });
     });
 
     it('should return undefined when provided username does not exist', () => {
-      expect(UsersFactory.getUserByUsername('abc')).toEqual(undefined);
+      var user = UsersFactory.getUserByUsername('abc');
+
+      expect(user).toEqual(undefined);
     });
   });
 
