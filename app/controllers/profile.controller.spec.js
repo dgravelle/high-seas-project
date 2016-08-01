@@ -22,25 +22,14 @@ describe('ProfileController', () => {
     ProfileController = _$controller_('ProfileController', {
       $scope: scope, user: user
     });
-    expect(scope).toBeDefined();
+
+    expect(ProfileController).toBeDefined();
   }));
 
-  // describe('user profile', () => {
-
-
-    // it('should load user profile on home route', () => {
-    //   expect(profile).toBeDefined();
-    //   expect(profile.controller).toEqual('ProfileController');
-    //   expect(profile.resolve.user).toBeDefined();
-    // });
-    //
-    // it('should load Abbys profile', ()=> {
-    //   var profile = route.routes['/'];
-    //   var profileResolveBlock = profile.resolve.user;
-    //   var user = injector.invoke(profileResolveBlock);
-    //
-    //   expect(user).toEqual({ id: 1, username: 'abby', email: 'abby@test.com', password: 'password' })
-    // })
-
-
+  describe('form validation', () => {
+    it('should return "Success! Your email has been updated to ${user.email}" when form is submitted with a unique email address', () => {
+      expect(scope.validate(true, { email: 'new@email.com' })).toEqual('Success! Your email has been updated to new@email.com');
+    });
   });
+
+});

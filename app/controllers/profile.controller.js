@@ -43,10 +43,7 @@
         }
       }
 
-      $scope.makeError = () => {
-        $scope.profileForm.email.$invalid = !$scope.profileForm.email.$invalid;
-        console.log($scope.profileForm);
-      }
+
 
     }
 

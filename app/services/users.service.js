@@ -27,8 +27,13 @@
       }
 
       Users.updateEmail = (userId, newEmail) => {
-        userList[userId].email = newEmail;
-        return userList[userId];
+        var user = userList.find((user) => {
+          return user.id === userId;
+        });
+
+        user.email = newEmail;
+
+        return user;
       }
 
       Users.getUserByUsername = (username) => {
