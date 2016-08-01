@@ -17,14 +17,12 @@
 
       Users.getUser = (userId) => {
         return $http.get('/api/users/' + userId).then(user => {
-          console.log('from factory', user.data);
           return user.data;
         });
       }
 
       Users.getUserByEmail = (email) => {
         return $http.get('/api/users/email_exists?email=' + email).then(user => {
-          console.log(user);
           return user.data
         })
       }
@@ -37,9 +35,9 @@
       }
 
       Users.getUserByUsername = (username) => {
-        return userList.find(user => {
-          return user.username === username;
-        });
+        return $http.get('api/users/username_exists?username=' + username).then(data => {
+          return data;
+        })
       }
 
       return Users;

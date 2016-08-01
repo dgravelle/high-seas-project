@@ -43,6 +43,20 @@ app.get('/api/users/email_exists', (req, res) => {
   }
 
   res.send(user);
+});
+
+app.get('/api/users/username_exists', (req, res) => {
+  var username = req.query.username;
+
+  var user = userList.find(user => {
+    return user.username === username;
+  });
+
+  if (user === undefined) {
+    user = false;
+  }
+
+  res.json(user);
 })
 
 app.get('/api/users/:id', (req, res) => {
@@ -67,6 +81,8 @@ app.put('/api/users/:id', (req, res) => {
 
   res.json(user)
 });
+
+
 
 
 

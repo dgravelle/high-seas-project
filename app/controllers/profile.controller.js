@@ -41,6 +41,7 @@
               });
             }
             else {
+              $scope.emailTaken = true;
               return $scope.emailTaken = 'Sorry, this email is already in use';
             }
           });
