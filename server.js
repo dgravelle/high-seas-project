@@ -92,7 +92,12 @@ app.put('/api/users/:id', (req, res) => {
     user.username = username;
   }
 
-  res.json(user)
+  var timeout = setTimeout(() => {
+    console.log('running');
+    res.json(user)
+  }, 2000);
+
+  timeout;
 });
 
 app.listen(8080);
