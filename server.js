@@ -41,6 +41,9 @@ app.get('/api/users/email_exists', (req, res) => {
   if (user === undefined) {
     user = false;
   }
+  else {
+    user = true;
+  }
 
   res.send(user);
 });
@@ -54,6 +57,9 @@ app.get('/api/users/username_exists', (req, res) => {
 
   if (user === undefined) {
     user = false;
+  }
+  else {
+    user = true;
   }
 
   res.json(user);
@@ -88,12 +94,6 @@ app.put('/api/users/:id', (req, res) => {
 
   res.json(user)
 });
-
-
-
-
-
-
 
 app.listen(8080);
 console.log('listening on 8080');

@@ -22,26 +22,25 @@
       }
 
       Users.getUserByEmail = (email) => {
-        return $http.get('/api/users/email_exists?email=' + email).then(user => {
-          return user.data
+        return $http.get('/api/users/email_exists?email=' + email).then(data => {
+          return data.data
         })
       }
 
       Users.updateEmail = (userId, newEmail) => {
         return $http.put('/api/users/' + userId, { email: newEmail }).then(data => {
-          console.log(data);
           return data;
         });
       }
 
       Users.getUserByUsername = (username) => {
         return $http.get('api/users/username_exists?username=' + username).then(data => {
-          return data;
+          return data.data;
         });
       }
 
       Users.updateUsername = (userId, username) => {
-        return $http.put('api/users/' + userId).then(data => {
+        return $http.put('api/users/' + userId, { username: username }).then(data => {
           return data;
         });
       }

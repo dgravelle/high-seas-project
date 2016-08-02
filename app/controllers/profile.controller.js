@@ -26,7 +26,7 @@
 
       $scope.updateEmail = (userId, email) => {
         UsersFactory.getUserByEmail(email).then(data => {
-          if (!data.data) {
+          if (!data) {
             UsersFactory.updateEmail(userId, email).then(data => {
               var user = data.data
               $scope.emailTaken = false;
@@ -34,7 +34,7 @@
                 msg: `Success! Your email has been updated to ${user.email}`
               });
               profileStore.email = user.email;
-              
+
               return $scope.successMsg;
             });
           }
@@ -49,7 +49,7 @@
 
       $scope.updateUsername = (userId, username) => {
         UsersFactory.getUserByUsername(username).then(data => {
-          if (!data.data) {
+          if (!data) {
             UsersFactory.updateUsername(userId, username).then(data => {
               var user = data.data;
               $scope.userNameTaken = false;
