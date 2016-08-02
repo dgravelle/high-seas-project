@@ -13,6 +13,11 @@
       $scope.emailTaken = false;
       $scope.userNameTaken = false;
       $scope.profile = {};
+      $scope.focus = false;
+
+      $scope.setFocusEl = function(e) {
+        $scope.focus = true;
+      }
 
       $scope.setProfile = () => {
         $scope.profile = {
@@ -28,6 +33,7 @@
           if (!data) {
             UsersFactory.updateEmail(userId, email).then(data => {
               var user = data.data
+
               $scope.emailTaken = false;
               $scope.successMsg.push({
                 msg: `Success! Your email has been updated to ${user.email}`

@@ -5,22 +5,21 @@
 </div>
 
 <form class="well" name="profileForm" ng-submit="validate(profileForm.$valid, profile)">
-  <div class="form-group" ng-class="{ 'has-error': profileForm.email.$invalid || emailTaken }">
+  <div class="form-group" ng-class="{ 'has-error': profileForm.email.$error.email || emailTaken }">
     <label for="email" class="control-label">Email</label>
     <input id="email"
       name="email"
       type="email"
       class="form-control"
       ng-model="profile.email"
-      ng-pattern="/^.+@.+\..+$/"
+      ng-model-options="{ 'updateOn': 'blur' }"
       required
       >
       <div ng-show="emailTaken">
         <span class="help-block">{{ emailTaken }}</span>
       </div>
-      <div ng-messages="profileForm.email.$error">
-        <span class="help-block" ng-message="required">Please provide a valid email address</span>
-        <span class="help-block" ng-message="pattern">Please provide a valid email address</span>
+      <div ng-show="profileForm.email.$error.email">
+        <span class="help-block">Please provide a valid email address</span>
       </div>
   </div>
 
