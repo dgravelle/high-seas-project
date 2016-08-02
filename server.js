@@ -45,7 +45,12 @@ app.get('/api/users/email_exists', (req, res) => {
     user = true;
   }
 
-  res.send(user);
+  var timeout = setTimeout(() => {
+    console.log('running');
+    res.json(user)
+  }, 3000);
+
+  timeout;
 });
 
 app.get('/api/users/username_exists', (req, res) => {
@@ -62,7 +67,12 @@ app.get('/api/users/username_exists', (req, res) => {
     user = true;
   }
 
-  res.json(user);
+  var timeout = setTimeout(() => {
+    console.log('running');
+    res.json(user)
+  }, 2000);
+
+  timeout;
 })
 
 app.get('/api/users/:id', (req, res) => {
@@ -72,7 +82,12 @@ app.get('/api/users/:id', (req, res) => {
     return u.id === Number(id);
   });
 
-  res.json(user);
+  var timeout = setTimeout(() => {
+    console.log('running');
+    res.json(user)
+  }, 2000);
+
+  timeout;
 });
 
 app.put('/api/users/:id', (req, res) => {

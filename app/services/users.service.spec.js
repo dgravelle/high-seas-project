@@ -1,3 +1,11 @@
+/*
+
+To set these tests up, I followed referrenced the blog post below for guidance.
+
+http://www.bradoncode.com/blog/2015/06/26/unit-testing-http-ngmock-fundamentals/
+
+*/
+
 describe('Users Factory', () => {
   var UsersFactory,
       httpBackend,

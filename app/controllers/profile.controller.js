@@ -23,7 +23,6 @@
         }
       }
 
-
       $scope.updateEmail = (userId, email) => {
         UsersFactory.getUserByEmail(email).then(data => {
           if (!data) {
@@ -52,10 +51,10 @@
           if (!data) {
             UsersFactory.updateUsername(userId, username).then(data => {
               var user = data.data;
-              $scope.userNameTaken = false;
               $scope.successMsg.push({
                 msg: `Success! Your username has been updated to ${user.username}`
               });
+              $scope.userNameTaken = false;
               profileStore.username = user.username;
 
               return $scope.successMsg;
@@ -73,7 +72,8 @@
         if (!valid) {
           return
         }
-
+        $scope.emailTaken = false;
+        $scope.userNameTaken = false;
         $scope.successMsg = [];
 
         if (form.email !== profileStore.email) {
@@ -86,6 +86,5 @@
       }
 
       $scope.setProfile();
-
     }
   })();
