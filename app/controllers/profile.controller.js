@@ -9,44 +9,83 @@
     function ProfileController($scope, UsersFactory, user) {
       var profileStore = user;
 
-      $scope.successMsg;
-      $scope.emailTaken;
-      $scope.userNameTaken;
+      $scope.successMsg = [];
+      $scope.emailTaken = false;
+      $scope.userNameTaken = false;
+      $scope.profile = {};
 
-      ($scope.resetProfile = () => {
+      $scope.setProfile = () => {
         $scope.profile = {
           email: profileStore.email,
           username: profileStore.username,
           password: profileStore.password,
           passwordConfirm: profileStore.password
         }
-        $scope.emailTaken = false;
-        $scope.userNameTaken = false;
-      })()
+      }
 
 
+      $scope.updateEmail = (userId, email) => {
+        UsersFactory.getUserByEmail(email).then(data => {
+          if (!data.data) {
+            UsersFactory.updateEmail(userId, email).then(data => {
+              var user = data.data
+              $scope.emailTaken = false;
+              $scope.successMsg.push({
+                msg: `Success! Your email has been updated to ${user.email}`
+              });
+              profileStore.email = user.email;
+              
+              return $scope.successMsg;
+            });
+          }
+          else {
+            $scope.emailTaken = true;
+            $scope.emailTaken = 'Sorry, this email is already in use';
+
+            return $scope.emailTaken;
+          }
+        });
+      }
+
+      $scope.updateUsername = (userId, username) => {
+        UsersFactory.getUserByUsername(username).then(data => {
+          if (!data.data) {
+            UsersFactory.updateUsername(userId, username).then(data => {
+              var user = data.data;
+              $scope.userNameTaken = false;
+              $scope.successMsg.push({
+                msg: `Success! Your username has been updated to ${user.username}`
+              });
+              profileStore.username = user.username;
+
+              return $scope.successMsg;
+            });
+          }
+          else {
+            $scope.userNameTaken = `Sorry, this ${username} is already in use`;
+
+            return $scope.userNameTaken;
+          }
+        });
+      }
 
       $scope.validate = (valid, form) => {
         if (!valid) {
           return
         }
 
+        $scope.successMsg = [];
+
         if (form.email !== profileStore.email) {
-          UsersFactory.getUserByEmail(form.email).then(data => {
-            if (!data.data) {
-              UsersFactory.updateEmail(user.id, form.email).then(data => {
-                var user = data.data
-                $scope.emailTaken = false;
-                return $scope.successMsg = `Success! Your email has been updated to ${user.email}`;
-              });
-            }
-            else {
-              $scope.emailTaken = true;
-              return $scope.emailTaken = 'Sorry, this email is already in use';
-            }
-          });
+          $scope.updateEmail(user.id, form.email);
+        }
+
+        if (form.username !== profileStore.username) {
+          $scope.updateUsername(user.id, form.username);
         }
       }
+
+      $scope.setProfile();
 
     }
   })();

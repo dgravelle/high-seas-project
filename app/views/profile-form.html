@@ -1,5 +1,7 @@
-<div class="alert alert-success text-center" ng-show="successMsg">
-  {{ successMsg }}
+<div ng-repeat="msg in successMsg">
+  <div class="alert alert-success text-center">
+    {{ msg.msg }}
+  </div>
 </div>
 
 <form class="well" name="profileForm" ng-submit="validate(profileForm.$valid, profile)">
@@ -42,6 +44,6 @@
     <label for="password-confirm" class="control-label">Confirm Password</label>
     <input id="password-confirm" name="password-confirm" type="password" class="form-control" ng-model="profile.passwordConfirm">
   </div>
-  <button class="btn btn-default" ng-click="resetProfile()">Cancel</button>
+  <button class="btn btn-default" ng-click="setProfile()">Cancel</button>
   <input type="submit" class="btn btn-primary pull-right" value="Submit" ng-disabled="profileForm.$invalid">
 </form>

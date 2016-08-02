@@ -72,12 +72,19 @@ app.get('/api/users/:id', (req, res) => {
 app.put('/api/users/:id', (req, res) => {
   var id = req.params.id;
   var newEmail = req.body.email;
+  var username = req.body.username;
 
   var user = userList.find((u) => {
     return u.id === Number(id);
   });
 
-  user.email = newEmail;
+  if (newEmail !== undefined) {
+    user.email = newEmail;
+  }
+
+  if (username !== undefined) {
+    user.username = username;
+  }
 
   res.json(user)
 });

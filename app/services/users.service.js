@@ -37,7 +37,13 @@
       Users.getUserByUsername = (username) => {
         return $http.get('api/users/username_exists?username=' + username).then(data => {
           return data;
-        })
+        });
+      }
+
+      Users.updateUsername = (userId, username) => {
+        return $http.put('api/users/' + userId).then(data => {
+          return data;
+        });
       }
 
       return Users;
